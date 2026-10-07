@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProAcademy | Global Open-Access Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 50 50" fill="none" xmlns="http://w3.org">
+                    <circle cx="25" cy="25" r="23" stroke="#2563eb" stroke-width="4"/>
+                    <path d="M25 12L37 22V35H13V22L25 12Z" fill="#2563eb"/>
+                    <path d="M20 27L25 32L32 22" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="brand-name">Pro<span>Academy</span></span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#courses">Explore Tracks</a></li>
+                    <li><a href="#data-hub">Student ID</a></li>
+                </ul>
+            </nav>
+            <div class="nav-btn">
+                <a href="#courses" class="btn btn-primary">Start Learning Free</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Premium Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <span class="badge"><i class="fa-solid fa-graduation-cap"></i> 100% Free World-Class Education</span>
+                <h1>Master The World's <span class="highlight">Most Demanding</span> Skills</h1>
+                <p>Learn Spoken English, Freelancing, Java, AI Tools, and Tech from top-tier curated masterclasses. Complete assessments and download your verified platform credential instantly.</p>
+                
+                <!-- Intelligent Search Bar -->
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="courseSearch" placeholder="What skill do you want to master today? (e.g. English, Java, Freelancing)..." onkeyup="filterCourses()">
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://unsplash.com" alt="Students Upskilling">
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Institutional Banner -->
+    <div class="container institutional-banner">
+        <p><i class="fa-solid fa-building-columns"></i> ProAcademy Verified Project — Supported by Student Data Network Initiative</p>
+    </div>
+
+    <!-- Course Hub -->
+    <section id="courses" class="courses-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse Top <span class="highlight">Demanding Tracks</span></h2>
+                <p>Filter by specialization, learn for free, pass the micro-test, and earn certificates.</p>
+            </div>
+
+            <!-- Dynamic Category Filter Navigation -->
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterCategory('all')">All Specializations</button>
+                <button class="filter-btn" onclick="filterCategory('English')">English & Communication</button>
+                <button class="filter-btn" onclick="filterCategory('Freelancing')">Freelancing & Agency</button>
+                <button class="filter-btn" onclick="filterCategory('Tech')">IT & Coding</button>
+                <button class="filter-btn" onclick="filterCategory('Creative')">Design & Video</button>
+                <button class="filter-btn" onclick="filterCategory('Business')">Business & Growth</button>
+            </div>
+
+            <!-- Dynamic Course Grid -->
+            <div class="course-grid" id="courseContainer">
+                <!-- Loaded dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Data Capture Hub -->
+    <section id="data-hub" class="container data-capture-container">
+        <div class="data-box">
+            <h3><i class="fa-solid fa-id-card"></i> ফ্রি স্টুডেন্ট আইডি অ্যাক্টিভেশন (Student Database Hub)</h3>
+            <p>সার্টিফিকেট ডাউনলোড এবং সকল কোর্সের লাইফটাইম অ্যাক্সেস আজীবন ফ্রি রাখতে আপনার সঠিক মোবাইল নম্বরটি দিয়ে যুক্ত হোন।</p>
+            <div class="input-group">
+                <input type="tel" id="studentPhone" placeholder="আপনার মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)">
+                <button class="btn btn-secondary" onclick="saveStudentData()">অ্যাক্টিভেট করুন</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz & Certificate Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="quiz-intro">
+                <h2 id="modal-course-title">Loading Curriculum...</h2>
+                <p>Complete the full structured video masterclass carefully, then take the test to secure your credential.</p>
+                <div class="video-container">
+                    <iframe id="courseVideoFrame" width="100%" height="360" src="" title="Course Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="startTest()">Launch Certification Quiz</button>
+            </div>
+            
+            <div id="quiz-questions" class="hidden">
+                <h2>Platform Competency Check</h2>
+                <p id="question-text">Verifying application logic question...</p>
+                <div class="options-container">
+                    <button class="option-btn" onclick="checkAnswer(true)"><i class="fa-solid fa-circle-check text-green"></i> True / Correct</button>
+                    <button class="option-btn" onclick="checkAnswer(false)"><i class="fa-solid fa-circle-xmark text-red"></i> False / Incorrect</button>
+                </div>
+            </div>
+
+            <div id="certificate-box" class="hidden text-center">
+                <div class="success-icon">🎉</div>
+                <h2>Grand Certification Achieved!</h2>
+                <p>Your performance meets elite institutional standards. Here is your platform credential:</p>
+                <div class="certificate" id="printableCertificate">
+                    <h3>PROACADEMY GLOBAL EDUCATION NETWORK</h3>
+                    <p class="cert-subtitle">HONOR CODE COMPLETION CERTIFICATE</p>
+                    <p class="cert-body">This explicitly confirms that an ambitious learner has successfully completed all academic prerequisites for</p>
+                    <h4 id="cert-course-name">COURSE TRACK TITLE</h4>
+                    <p class="date">Verified Online Program • Authenticity Secured</p>
+                </div>
+                <button class="btn btn-secondary margin-top" onclick="window.print()"><i class="fa-solid fa-print"></i> Save / Print Official PDF Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clean Premium Footer -->
+    <footer>
+        <div class="container footer-container">
+            <p>&copy; 2026 ProAcademy Network. Open-Access Global Education Initiative.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Guardrails</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
